@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
 
-import requests
+from __future__ import print_function
 import sys
+import requests
 
 
 def login(username, password):
@@ -30,7 +31,7 @@ def login(username, password):
         elif loginResult['result'] == 'success':
             print('网络登录成功！')
         else:
-            print('为知错误！') 
+            print('未知错误！') 
 
 
 def logout():
