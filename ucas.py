@@ -21,6 +21,7 @@ def login(username, password):
             'service': '',
             'queryString': resSearch,
             'operatorPwd': '',
+            'operatorUserId': '',
             'validcode': ''
         };
         loginResp = requests.post('http://210.77.16.21/eportal/InterFace.do?method=login', data=params)
@@ -36,9 +37,9 @@ def login(username, password):
 
 def logout():
     logoutUrl = 'http://210.77.16.21/eportal/InterFace.do?method=logout'
-    logoutR = requests.get(logoutUrl)
-    logoutR.encoding = 'utf-8'
-    result = logoutR.json()
+    logoutRresp = requests.get(logoutUrl)
+    logoutRresp.encoding = 'utf-8'
+    result = logoutRresp.json()
     print(result['message'])
 
 
