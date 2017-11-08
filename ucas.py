@@ -49,15 +49,15 @@ def print_usage():
     print("")
     print("ucas.py is a command interface for ucas web")
     print("usage: python[3] ucas.py [OPTION [params]]")
-    print("    -i, --login  [username] [password]")
+    print("    login [username] [password]")
     print("            login to ucas network")
-    print("    -o, --logout")
+    print("    logout")
     print("            logout from ucas network")
-    print("    -f, --find")
+    print("    find")
     print("            find a user automatically")
 
 
-def find():
+def find(skip=0):
     for floor in range(1, 8):
         for room in range(1, 15):
             for ab in {'a', 'b'}:
@@ -65,7 +65,11 @@ def find():
                 password = "2{}{:0>2}".format(floor, room)
                 print("user:" + user + " pass:" + password)
                 if login(user, password):
-                    return True
+                    skip -= 1
+                    if skip <= 0:
+                        return True
+                    else:
+                        logout()
     return False
 
 
@@ -73,12 +77,15 @@ if __name__ == '__main__':
     if len(sys.argv) < 2:
         print("参数错误!")
         print_usage()
-    elif sys.argv[1] == '--login' or sys.argv[1] == '-i':
+    elif sys.argv[1] == 'login':
         login(sys.argv[2], sys.argv[3])
-    elif sys.argv[1] == '--logout' or sys.argv[1] == '-o':
+    elif sys.argv[1] == 'logout':
         logout()
-    elif sys.argv[1] == '--find' or sys.argv[1] == '-f':
-        find()
+    elif sys.argv[1] == 'find':
+        skip = 0
+        if len(sys.argv) > 3 and sys.argv[2] == '--skip':
+            skip = int(sys.argv[3])
+        find(skip)
     else:
         print("参数错误!")
         print_usage()
