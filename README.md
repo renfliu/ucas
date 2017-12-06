@@ -4,8 +4,8 @@
 
 ```
 usage: python[3] ucas.py [OPTION [params]]
-    -i, --login  [username] [password]
+    login  [username] [password]
             login to ucas network
-    -o, --logout
+    logout
             logout from ucas network
 ```
