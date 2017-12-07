@@ -6,7 +6,7 @@ import sys
 import requests
 
 
-def login(username, password):
+def login(username, password, prefix=False):
     url = 'http://210.77.16.21'
     r = requests.get(url)
     resUrl = r.url
@@ -15,6 +15,9 @@ def login(username, password):
         print("网络已连接!")
         exit()
     else:
+        if prefix:
+            username = "%E5%8F%91%5C" + username
+            print("user:" + username + "  pass:" + password)
         params = {
             'userId': username,
             'password': password,
@@ -49,8 +52,9 @@ def print_usage():
     print("")
     print("ucas.py is a command interface for ucas web")
     print("usage: python[3] ucas.py [OPTION [params]]")
-    print("    login [username] [password]")
-    print("            login to ucas network")
+    print("    login [--preifx] [username] [password]")
+    print("            login to ucas network, e.g. python ucas.py user123 pass123")
+    print("            --prefix add '发\\' before username")
     print("    logout")
     print("            logout from ucas network")
     print("    find")
@@ -78,7 +82,10 @@ if __name__ == '__main__':
         print("参数错误!")
         print_usage()
     elif sys.argv[1] == 'login':
-        login(sys.argv[2], sys.argv[3])
+        if sys.argv[2] == '--prefix':
+            login(sys.argv[3], sys.argv[4], True)
+        else:
+            login(sys.argv[2], sys.argv[3])
     elif sys.argv[1] == 'logout':
         logout()
     elif sys.argv[1] == 'find':
