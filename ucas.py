@@ -52,9 +52,9 @@ def print_usage():
     print("")
     print("ucas.py is a command interface for ucas web")
     print("usage: python[3] ucas.py [OPTION [params]]")
-    print("    login [--preifx] [username] [password]")
+    print("    login [-p] [username] [password]")
     print("            login to ucas network, e.g. python ucas.py user123 pass123")
-    print("            --prefix add '发\\' before username")
+    print("            -p, --prefix: add '发\\' before username")
     print("    logout")
     print("            logout from ucas network")
     print("    find")
@@ -82,7 +82,7 @@ if __name__ == '__main__':
         print("参数错误!")
         print_usage()
     elif sys.argv[1] == 'login':
-        if sys.argv[2] == '--prefix':
+        if sys.argv[2] == '--prefix' or sys.argv[2] == '-p':
             login(sys.argv[3], sys.argv[4], True)
         else:
             login(sys.argv[2], sys.argv[3])
