@@ -25,7 +25,8 @@ def login(username, password, prefix=False):
             'queryString': resSearch,
             'operatorPwd': '',
             'operatorUserId': '',
-            'validcode': ''
+            'validcode': '',
+            'passwordEncrypt': 'false'
         };
         loginResp = requests.post('http://210.77.16.21/eportal/InterFace.do?method=login', data=params)
         loginResp.encoding = 'utf-8'
